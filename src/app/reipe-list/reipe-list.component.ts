@@ -75,7 +75,7 @@ export class ReipeListComponent implements OnInit {
         tmpFav = x
         this.favRecipeDatas = tmpFav?.favourites?.favourite
         console.log("selector fav obj", this.favRecipeDatas)
-        this.mapFavRecipeItems()
+        // this.mapFavRecipeItems()
       })
     }
   }
@@ -117,48 +117,48 @@ export class ReipeListComponent implements OnInit {
       this.store.dispatch(deletePost({id}))
     }
   }
-  mapFavRecipeItems(){
-    console.log("recipes favourite", this.favRecipeDatas, "len", this.favRecipeDatas?.length)
-    // let ids = []
-    // ids.push(this.favRecipeDatas?.data)
-    // console.log("favId", ids)
-    for(let i =0 ; i< this.favRecipeDatas.length ; i++){
-      if(this.userData?.id == this.favRecipeDatas[i].user_id){
-        this.favouriteObj[this.favRecipeDatas[i].fav_id - 1] = true
-        // this.favouriteObj[this.favRecipeDatas?.data[i].fav_id] = true
+  // mapFavRecipeItems(){
+  //   console.log("recipes favourite", this.favRecipeDatas, "len", this.favRecipeDatas?.length)
+  //   // let ids = []
+  //   // ids.push(this.favRecipeDatas?.data)
+  //   // console.log("favId", ids)
+  //   for(let i =0 ; i< this.favRecipeDatas.length ; i++){
+  //     if(this.userData?.id == this.favRecipeDatas[i].user_id){
+  //       this.favouriteObj[this.favRecipeDatas[i].fav_id - 1] = true
+  //       // this.favouriteObj[this.favRecipeDatas?.data[i].fav_id] = true
 
-        console.log("mapped fav items",this.favouriteObj,"i",this.favRecipeDatas[i].fav_id)
-      }
-    }
-  }
-  onItemSelectFavourite(i: any, data:any){
-    this.favouriteObj[i] = true
-    Swal.fire('', 'Recipe added to favourites', 'success')
-    let tmp:any ={}
-    tmp.userId = this.userData?.id
-    tmp.favId = data.id
+  //       console.log("mapped fav items",this.favouriteObj,"i",this.favRecipeDatas[i].fav_id)
+  //     }
+  //   }
+  // }
+  // onItemSelectFavourite(i: any, data:any){
+  //   this.favouriteObj[i] = true
+  //   Swal.fire('', 'Recipe added to favourites', 'success')
+  //   let tmp:any ={}
+  //   tmp.userId = this.userData?.id
+  //   tmp.favId = data.id
     
 
-    console.log("mapped data", tmp)
-    if(tmp.userId && tmp.favId){
-      this.store.dispatch(addToFavourite(tmp))
+  //   console.log("mapped data", tmp)
+  //   if(tmp.userId && tmp.favId){
+  //     this.store.dispatch(addToFavourite(tmp))
       
-    }
+  //   }
 
-  }
-  onItemDeSelectFavourite(i: number, data:any){
-    console.log("id to be deselected", i,data)
-    this.favouriteObj[i] = false
-    this.mappingArr.splice(i+1, -1)
-    console.log("after removed", this.mappingArr);
-    let tmp:any = {}
-    tmp.userId = this.userData?.id;
-    tmp.favId = data.id
-    console.log("deselected item", tmp)
-    if(tmp.userId && tmp.favId){
-      this.store.dispatch(removeFromFavourite(tmp))
-    }    
-  }
+  // }
+  // onItemDeSelectFavourite(i: number, data:any){
+  //   console.log("id to be deselected", i,data)
+  //   this.favouriteObj[i] = false
+  //   this.mappingArr.splice(i+1, -1)
+  //   console.log("after removed", this.mappingArr);
+  //   let tmp:any = {}
+  //   tmp.userId = this.userData?.id;
+  //   tmp.favId = data.id
+  //   console.log("deselected item", tmp)
+  //   if(tmp.userId && tmp.favId){
+  //     this.store.dispatch(removeFromFavourite(tmp))
+  //   }    
+  // }
   edit(data: any){
    console.log("something", data) 
   }
