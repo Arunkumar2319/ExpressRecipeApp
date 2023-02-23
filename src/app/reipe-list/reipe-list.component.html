@@ -4,10 +4,13 @@
             <li><a class="active" href="">Home</a></li>
             <li><a href="">Offers</a></li>
             <li><a (click)="$event.preventDefault();addRecipe()">New</a></li>
-            <li><a (click)="$event.preventDefault();onClickLogin()">Login</a></li>
+            <li *ngIf="!userData?.id"><a (click)="$event.preventDefault();onClickLogin()">Login</a></li>
             <!-- <li class="m-2" style="position: relative;float:right"><button class="btn btn-primary" (click)="searchRecipeItem()">Search</button></li>  -->
+            <!-- <li><i class="fa fa-sign-out" aria-hidden="true"></i></li> -->
+            <!-- <li><a (click)="$event.preventDefault()" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> </li> -->
+            <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i *ngIf="userData?.id" class="fa fa-user-circle" aria-hidden="true"></i></li>
+            <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i *ngIf="userData?.id" class="fa fa-sign-out" aria-hidden="true"></i></li>
 
-            <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i class="fa fa-sign-out" aria-hidden="true"></i></li>
             <li class="m-2" style="position: relative;;float:right">
                 <form class="form-inline"> 
                     <input class="form-control mr-sm-2" sty type="search"  placeholder="Search" aria-label="Search">
@@ -34,7 +37,7 @@
                       </div> -->
                       <div class="col-md-2 favouriteAlign overlay">
                         <!-- <span  class="btn btn-info m-2" (click)="fovouriteBool = !fovouriteBool;onItemSelectFavourite(i)">Favourites<br><i *ngIf="favouriteObj[i].fav" class="fa fa-heart" style="color: red"></i><i *ngIf="!favouriteObj[i].fav" class="fa fa-heart-o"></i></span> -->
-                        <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)" title="Removw from Favourites"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
+                        <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)" title="Remove from Favourites"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
                         <span  class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)" title="Add to Favourites"><i  class="fa fa-heart-o m-2" style="color:red;font-size: 28px"></i></span>
   
                     </div>

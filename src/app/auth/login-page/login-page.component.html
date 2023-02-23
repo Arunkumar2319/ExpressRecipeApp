@@ -18,7 +18,13 @@
         <button class="btn btn-info" type="submit">Login</button>
       </div>
       <div class="row m-4">
-        <p style="color: blue;text-align: center"><a>Don't have account ?&nbsp;&nbsp;SignUp</a></p>
+        <p style="color: blue;text-align: center">Don't have account ?<a>&nbsp;&nbsp;SignUp</a></p>
+      </div>
+      <div class="row m-2">
+        <!-- <button class="btn btn-primary" type="button" (click)="signIn()">Login with Google</button> -->
+        <a style="color: red"  (click)="$event.preventDefault();signIn()" class="google btn"><i class="fa fa-google fa-fw">
+        </i> Login with Google+
+      </a>
       </div>
       </form>
     </div>
