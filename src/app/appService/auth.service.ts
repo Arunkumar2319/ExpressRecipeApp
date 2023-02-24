@@ -20,7 +20,5 @@ export class AuthService {
         console.log("login info", obj)
         return this.http.post(this.serviceApiUrl+ "api/login", obj)
     }
-    // formatUser(data: AuthResponse){
-    //     const user = new User( data.email)
-    // }
+   
 }

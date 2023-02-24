@@ -41,19 +41,13 @@ export class ReipeListComponent implements OnInit {
 
     let userData:any = sessionStorage.getItem('loginCredentials')
     this.userData = JSON.parse(userData)
-    console.log("user data", this.userData)
   
   this.postForm = new FormGroup({
     name: new FormControl(null,[Validators.required,Validators.minLength(3)]),
     description: new FormControl(null),
     ingredients: new FormControl(null)
-    })
-  
-  
- 
-  this.dataDescriber()
-    
-   
+    }) 
+  this.dataDescriber()  
   }
   onItemSelectRecipe(data:any){
 
@@ -62,10 +56,8 @@ export class ReipeListComponent implements OnInit {
     this.store.dispatch(getAllRecipe());
     this.store.select(getPost).subscribe(data => {
       this.dataList = data
-      console.log("got datas", this.dataList)
     })
     if(this.userData == undefined || this.userData == null ){   
-      console.log("login not done")  
     }
     else{
        this.store.dispatch(getAllFavourites());
@@ -81,18 +73,9 @@ export class ReipeListComponent implements OnInit {
   }
  
   addRecipe(){
-    console.log("new item clicked");
     this.route.navigateByUrl('/newRecipe')
   }
-  updateRecipe(data:any){
-
-
-    // dispatch action here
-    // const post: Post ={
-    //   id: this.postForm.value.id,
-    //   name: this.postForm.value.name,
-    //   description: this.postForm.value.description      
-    // }
+  updateRecipe(data:any){   
     const recipeName = this.recipeData.name
     const description = this.recipeData.description
     const ingredients = this.recipeData.ingredients
@@ -108,17 +91,14 @@ export class ReipeListComponent implements OnInit {
   }
   getId(data:any){
     this.recipeData = data
-    console.log("edit datas ", this.recipeData)
     this.route.navigateByUrl('recipeList/editRecipe/'+ data.id)    
   }
   deleteRecipe(id:any){
-    console.log("delete this id",id)
     if(confirm('Are you sure you want to delete')){
       this.store.dispatch(deletePost({id}))
     }
   }
   mapFavRecipeItems(){
-    console.log("recipes favourite", this.favRecipeDatas, "len", this.favRecipeDatas?.length)
     for(let i =0 ; i< this.favRecipeDatas.length ; i++){
       if(this.userData?.id == this.favRecipeDatas[i].user_id){
         this.favouriteObj[this.favRecipeDatas[i].fav_id - 1] = true

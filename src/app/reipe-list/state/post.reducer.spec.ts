@@ -31,4 +31,3 @@ describe('Test the reducer 2', () => {
     })
 })
 
-// 

@@ -4,7 +4,6 @@ import { Observable, ReplaySubject } from "rxjs";
 @Injectable()
 
 export class GoogleSignInService{
-    // private auth2!: gapi.auth2.GoogleAuth;
     private auth2!: gapi.auth2.GoogleAuth
     private subject = new ReplaySubject<gapi.auth2.GoogleUser>(1)
    constructor(){
@@ -20,7 +19,6 @@ export class GoogleSignInService{
     }).then( user => {
         this.subject.next(user)
     }).catch( () => {
-        // this.subject.next(null)
     })
    }
    public signOut() {

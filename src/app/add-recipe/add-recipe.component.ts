@@ -30,21 +30,13 @@ export class AddRecipeComponent implements OnInit {
     console.log(this.recipeForm)
     
     const post: Post = {
-      // id: '',
       recipeName: this.recipeForm.value.name,
       description: this.recipeForm.value.description,
       ingredients: this.recipeForm.value?.ingredients
     }
     var obj = {}
-    // obj.recipeName = this.recipeForm.value.name
-    // this.newRecipeObj.recipeName = this.recipeForm.value.name
-    // this.newRecipeObj.description = this.recipeForm.value.description
-    // this.newRecipeObj.ingredients = this.recipeForm.value.ingredients
     this.store.dispatch(addRecipe({post}))
     this.route.navigateByUrl('/recipelist')
     }
-    // this.recipeService.addNewRecipeItem(this.newRecipeObj).subscribe(obj => {
-    //   console.log("posted something", obj)
-    // })
   }
 }
