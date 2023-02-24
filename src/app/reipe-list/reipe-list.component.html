@@ -37,11 +37,9 @@
                       </div> -->
                       <div class="col-md-2 favouriteAlign overlay">
                         <!-- <span  class="btn btn-info m-2" (click)="fovouriteBool = !fovouriteBool;onItemSelectFavourite(i)">Favourites<br><i *ngIf="favouriteObj[i].fav" class="fa fa-heart" style="color: red"></i><i *ngIf="!favouriteObj[i].fav" class="fa fa-heart-o"></i></span> -->
-                        <!-- <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)" title="Remove from Favourites"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
-                        <span  class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)" title="Add to Favourites"><i  class="fa fa-heart-o m-2" style="color:red;font-size: 28px"></i></span> -->
-  
-                    </div>
-                      <!-- <span class="glyphicon overlay" >&#x270f;</span> -->
+                        <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)" title="Remove from Favourites"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
+                        <span  class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)" title="Add to Favourites"><i  class="fa fa-heart-o m-2" style="color:red;font-size: 28px"></i></span>
+     <!-- <span class="glyphicon overlay" >&#x270f;</span> -->
                     </div>
                     <!-- <div class="col-md-4">
                           <button class="btn btn-primary m-1" style="font-size:10px" (click)="getId(data)">Edit</button>
@@ -64,8 +62,8 @@
                   <div class="col-md-2 favouriteAlign">
                     <span  (click)="getId(data)"><i class=" fa fa-edit"></i></span>    
                     <span (click)="deleteRecipe(data.id)"><i class="fa fa-trash m-2" style="font-size:24px;color: red"></i></span>
-                    <!-- <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
-                      <span  class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)"><i  class="fa fa-heart-o m-2" style="font-size: 28px"></i></span> -->
+                    <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
+                      <span  class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)"><i  class="fa fa-heart-o m-2" style="font-size: 28px"></i></span>
 
                   </div>
                 </div>              
