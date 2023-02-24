@@ -10,37 +10,52 @@ import { AppState } from '../store/app.state';
 import { addToFavourite, deletePost, getAllFavourites, getAllRecipe, removeFromFavourite, updatePost } from './state/post.actions';
 import { getFavourites, getPost } from './state/post.selector';
 
+interface userObject {
+  id: Number;
+  userName: String;
+  email: String;
+  password: String;
+  name: String;
+}
+
+interface recipeObj{
+  id: Number;
+  recipeName : String;
+  description: String;
+  ingredients : String;
+}
+
 @Component({
   selector: 'app-reipe-list',
   templateUrl: './reipe-list.component.html',
   styleUrls: ['./reipe-list.component.scss']
 })
+
 export class ReipeListComponent implements OnInit {
 
   posts!: Observable<Post[]>;
   public dataList:any;
 
   postForm!: FormGroup;
-  public userData:any;
-  public recipeData:any;
-  public favRecipeDatas: any;
+  public userData!:userObject;
+  public recipeData!: recipeObj;
+  public favRecipeDatas: Array<any> = [];
 
-  public favouriteObj:any;
-  public mappingArr:any;
+  public favouriteObj:Array<Object> = [] ;
 
   public fovouriteBool: Boolean = false;
   constructor(private store: Store<AppState>,private route: Router,private router: ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
-    this.recipeData = {}
-    this.userData = []
+    // this.recipeData = {}
+    // this.userData = {}
 
     this.favouriteObj = []
-    this.mappingArr = []
     this.favRecipeDatas = []
 
     let userData:any = sessionStorage.getItem('loginCredentials')
     this.userData = JSON.parse(userData)
+    console.log("uaer data", this.userData)
   
   this.postForm = new FormGroup({
     name: new FormControl(null,[Validators.required,Validators.minLength(3)]),
@@ -76,7 +91,7 @@ export class ReipeListComponent implements OnInit {
     this.route.navigateByUrl('/newRecipe')
   }
   updateRecipe(data:any){   
-    const recipeName = this.recipeData.name
+    const recipeName = this.recipeData.recipeName
     const description = this.recipeData.description
     const ingredients = this.recipeData.ingredients
 
@@ -117,7 +132,6 @@ export class ReipeListComponent implements OnInit {
   }
   onItemDeSelectFavourite(i: number, data:any){
     this.favouriteObj[i] = false
-    this.mappingArr.splice(i+1, -1)
     let tmp:any = {}
     tmp.userId = this.userData?.id;
     tmp.favId = data.id

@@ -4,7 +4,6 @@ import { initialState } from "./auth.state";
 
 const authReducer = createReducer(initialState, 
     on(loginSuccess, (state, action) => {
-        console.log("auth reducer", action  )
         return {...state, action}
     })
 )

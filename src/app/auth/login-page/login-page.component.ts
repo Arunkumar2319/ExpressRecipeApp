@@ -41,8 +41,8 @@ export class LoginPageComponent implements OnInit {
       console.log("xxxxxxxxxxxxxxxxxxx", x)
       obj = x
       if(obj){
-        console.log("Got data",obj?.action?.results[0] )
-        sessionStorage.setItem("loginCredentials", JSON.stringify(obj?.action?.results[0]) )
+        console.log("Got data",obj?.action[0] )
+        sessionStorage.setItem("loginCredentials", JSON.stringify(obj?.action[0]) )
         this.router.navigateByUrl("recipelist")
       }
     })

@@ -13,7 +13,7 @@ export class AuthEffects{
         exhaustMap((action) => {
            return this.authService.checkLogin(action.emailAddr, action.password)
            .pipe(map((data: any) => {
-                return loginSuccess(data)        
+                return loginSuccess(data.results)        
             })) 
         })
         ) 
