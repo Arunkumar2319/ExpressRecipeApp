@@ -14,7 +14,7 @@ export class AuthService {
     serviceApiUrl: String = environment.serviceApiUrl
 
     checkLogin(email:String, password: String){
-        let obj:any = {}
+        let obj:User = {}
         obj.emailAddr = email
         obj.password = password
         console.log("login info", obj)

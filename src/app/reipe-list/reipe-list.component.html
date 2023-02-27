@@ -3,7 +3,6 @@
   <li><a href="">Offers</a></li>
   <li><a (click)="$event.preventDefault();addRecipe()">New</a></li>
   <li *ngIf="!userData?.id"><a (click)="$event.preventDefault();onClickLogin()">Login</a></li>
-  <!-- <li class="m-2" style="position: relative;float:right"><button class="btn btn-primary" (click)="searchRecipeItem()">Search</button></li>  -->
   <!-- <li><i class="fa fa-sign-out" aria-hidden="true"></i></li> -->
   <!-- <li><a (click)="$event.preventDefault()" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> </li> -->
   <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i *ngIf="userData?.id"

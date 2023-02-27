@@ -1,5 +1,12 @@
 import { createAction, props } from "@ngrx/store"
+import { favouriteRecipe } from "src/app/model/favouriteRecipe.model";
 import { Post } from "src/app/model/posts.model"
+
+interface favouriteRecipeObj{
+    id?: number;
+    userId?: number;
+    favId?: number;
+}
 
 export const ADD_POST_ACTION = '[Posts page] add post';
 export const UPDATE_POST_ACTION = '[Posts Page] update post';
@@ -7,7 +14,7 @@ export const DELETE_POST_ACTION = '[Posts delete] delete post';
 
 export const addRecipe = createAction(ADD_POST_ACTION, props<{post:Post}>())
 export const updatePost = createAction(UPDATE_POST_ACTION, props<{post:Post}>())
-export const deletePost = createAction(DELETE_POST_ACTION, props<{ id: string}>())
+export const deletePost = createAction(DELETE_POST_ACTION, props<{ id: number}>())
 
 
 // Get Recipe 
@@ -51,6 +58,6 @@ export enum Action_Type{
 export const REMOVE_FAVOURITE_SUCCESS = '[API CALL] Get all recipe success'
 export const removeFromFavourite = createAction(
     Action_Type.onRemoveFavourites,
-    props<{obj: any}>()
+    props<{obj: favouriteRecipeObj}>()
 )
 export const RemoveFromFavouriteSuccess = createAction(GET_ALL_RECIPE_SUCCESS)

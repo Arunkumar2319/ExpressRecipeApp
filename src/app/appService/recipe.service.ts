@@ -3,10 +3,19 @@ import { HttpClient} from "@angular/common/http"
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
 import { RecipeResponse } from "../model/recipeResponse.model";
+import { favouriteRecipe } from "../model/favouriteRecipe.model";
 
+interface recipeObj{
+    id?: number;
+    recipeName: string;
+    description: string;
+    ingredients?: string;
+ }
+ 
 @Injectable({
     providedIn: "root",
 })
+ 
 export class RecipeService{
     constructor(private http: HttpClient){}
 
@@ -19,22 +28,22 @@ export class RecipeService{
         );
     }
     fetchAllFavDatas(){
-        return this.http.get<Observable<any>>(this.serviceApiUrl + "favourites")
+        return this.http.get<Observable<favouriteRecipe>>(this.serviceApiUrl + "favourites")
     }
 
-    addNewRecipeItem(data:any){
+    addNewRecipeItem(data:recipeObj){
         return this.http.post(this.serviceApiUrl+ "addRecipe", data)
     }
-    updateRecipeById(data:any){
+    updateRecipeById(data:recipeObj){
         return this.http.post(this.serviceApiUrl+ "api/updateid", data)
     }
     getRecipeById(id: any){
         return this.http.get(this.serviceApiUrl+ "api/id", id)
     }
-    addRecipeToFavourite(data:any){
+    addRecipeToFavourite(data:favouriteRecipe){
         return this.http.post(this.serviceApiUrl+ "api/addFavourite", data)
     }
-    deleteRecipeFromFavourite(data:any){
+    deleteRecipeFromFavourite(data:favouriteRecipe){
         return this.http.delete(this.serviceApiUrl+ "api/deleteById?userId="+ data.userId +"&favId=" + data.favId)
     }
 }

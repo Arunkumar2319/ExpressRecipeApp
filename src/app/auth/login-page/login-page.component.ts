@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-// import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AppState } from 'src/app/store/app.state';
 import { loginStart } from '../state/auth.action';
 import { loginSuccessSelector } from '../state/auth.selector';

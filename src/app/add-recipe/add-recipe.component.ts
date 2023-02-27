@@ -14,11 +14,11 @@ import { AppState } from '../store/app.state';
 })
 export class AddRecipeComponent implements OnInit {
   recipeForm!: FormGroup;
-  public newRecipeObj:any;
+  // public newRecipeObj:any;
   constructor(private store:Store<AppState>,private route:Router, private recipeService:RecipeService) { }
 
   ngOnInit(): void {
-    this.newRecipeObj = {}
+    // this.newRecipeObj = {}
     this.recipeForm = new FormGroup({
     name: new FormControl(null,[Validators.required,Validators.minLength(3)]),
     description: new FormControl(null),

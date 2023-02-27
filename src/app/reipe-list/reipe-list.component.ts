@@ -11,7 +11,7 @@ import { addToFavourite, deletePost, getAllFavourites, getAllRecipe, removeFromF
 import { getFavourites, getPost } from './state/post.selector';
 
 interface userObject {
-  id: Number;
+  id: number;
   userName: String;
   email: String;
   password: String;
@@ -19,10 +19,17 @@ interface userObject {
 }
 
 interface recipeObj{
-  id: Number;
+  id: number;
   recipeName : String;
   description: String;
   ingredients : String;
+  imageurl?: String;
+}
+
+interface favObj{
+  id: number;
+  userId: number;
+  favId: number;
 }
 
 @Component({
@@ -71,6 +78,7 @@ export class ReipeListComponent implements OnInit {
     this.store.dispatch(getAllRecipe());
     this.store.select(getPost).subscribe(data => {
       this.dataList = data
+      console.log("data list in reipe list", this.dataList)
     })
     if(this.userData == undefined || this.userData == null ){   
     }
@@ -104,11 +112,11 @@ export class ReipeListComponent implements OnInit {
 
     this.store.dispatch(updatePost({post}))
   }
-  getId(data:any){
+  getId(data:recipeObj){
     this.recipeData = data
     this.route.navigateByUrl('recipeList/editRecipe/'+ data.id)    
   }
-  deleteRecipe(id:any){
+  deleteRecipe(id:number){
     if(confirm('Are you sure you want to delete')){
       this.store.dispatch(deletePost({id}))
     }
@@ -120,7 +128,7 @@ export class ReipeListComponent implements OnInit {
       }
     }
   }
-  onItemSelectFavourite(i: any, data:any){
+  onItemSelectFavourite(i: number, data:recipeObj){
     this.favouriteObj[i] = true
     Swal.fire('', 'Recipe added to favourites', 'success')
     let tmp:any ={}
@@ -130,7 +138,7 @@ export class ReipeListComponent implements OnInit {
       this.store.dispatch(addToFavourite(tmp))      
     }
   }
-  onItemDeSelectFavourite(i: number, data:any){
+  onItemDeSelectFavourite(i: number, data:recipeObj){
     this.favouriteObj[i] = false
     let tmp:any = {}
     tmp.userId = this.userData?.id;
@@ -138,8 +146,6 @@ export class ReipeListComponent implements OnInit {
     if(tmp.userId && tmp.favId){
       this.store.dispatch(removeFromFavourite(tmp))
     }    
-  }
-  edit(data: any){
   }
   searchRecipeItem(){
 

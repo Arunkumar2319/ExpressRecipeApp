@@ -5,7 +5,7 @@ import { initialState } from "./post.state"
 const _postsReducer = createReducer(initialState, on(addRecipe, (state,action) => {
     let post = {...action.post};
 
-    post.id = (state.posts.length + 1).toString();
+    post.id = (state.posts.length + 1);
 
     return{
         ...state,
@@ -24,16 +24,16 @@ on(updatePost, (state,action) =>{
         posts: updatedPosts
     }
 }),
-on(deletePost, (state,{ id }) =>{
-    console.log("delete id", id )
-    const updatedPost = state.posts.filter((post => {
-        return post.id !== id;
-    }));
-    return{
-        ...state,
-        posts: updatedPost
-    }
-}),
+// on(deletePost, (state,{ id }) =>{
+//     console.log("delete id", id )
+//     const updatedPost = state.posts.filter((post => {
+//         return post.id !== id;
+//     }));
+//     return{
+//         ...state,
+//         posts: updatedPost
+//     }
+// }),
 on(getAllRecipeSuccess, (state, action) => {
     return { ...state, data: action.data}
 }),

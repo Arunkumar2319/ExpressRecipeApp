@@ -1,5 +1,5 @@
 export class AuthResponse{
-    id?: any;
+    id?: number;
     userName?: String;
     email?: String;
     password?: String;
