@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient} from "@angular/common/http"
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
-import { RecipeResponse } from "../model/recipeResponse.model";
+import { RecipeResponse, RecipeSuccessResponse } from "../model/recipeResponse.model";
 import { favouriteRecipe } from "../model/favouriteRecipe.model";
 
 interface recipeObj{
@@ -22,8 +22,8 @@ export class RecipeService{
     serviceApiUrl: String = environment.serviceApiUrl;
 
 
-    fetchAllDatas(): Observable<RecipeResponse>{
-        return this.http.get<RecipeResponse>(
+    fetchAllDatas(): Observable<RecipeResponse[]>{
+        return this.http.get<RecipeResponse[]>(
             this.serviceApiUrl + "recipes"
         );
     }
@@ -37,8 +37,8 @@ export class RecipeService{
     updateRecipeById(data:recipeObj){
         return this.http.post(this.serviceApiUrl+ "api/updateid", data)
     }
-    getRecipeById(id: any){
-        return this.http.get(this.serviceApiUrl+ "api/id", id)
+    getRecipeById(id: number){
+        return this.http.get(this.serviceApiUrl+ "api/id?id=" + id)
     }
     addRecipeToFavourite(data:favouriteRecipe){
         return this.http.post(this.serviceApiUrl+ "api/addFavourite", data)

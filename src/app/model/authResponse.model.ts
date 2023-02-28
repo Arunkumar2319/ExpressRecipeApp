@@ -5,4 +5,5 @@ export class AuthResponse{
     password?: String;
     name?: String;
     premium?: String;
+    results?:{}
 }

@@ -1,18 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, switchMap } from "rxjs";
-import { LoginService } from "src/app/appService/login.service";
 import { RecipeService } from "src/app/appService/recipe.service";
+import { RecipeResponse, RecipeSuccessResponse } from "src/app/model/recipeResponse.model";
 import { Action_Type, AddToFavouriteSuccess, getAllFavouriteSuccess, getAllRecipeSuccess, RemoveFromFavouriteSuccess } from "./post.actions";
 
 @Injectable()
 export class postEffects{
-    constructor(private loginService: LoginService, private recipeService: RecipeService, private action$: Actions ){}
+    constructor(private recipeService: RecipeService, private action$: Actions ){}
 
     LoadAllRecipeData$ = createEffect(()  => {
         return this.action$.pipe(ofType(Action_Type.onGetAllRecipes),
             switchMap(() => this.recipeService.fetchAllDatas().pipe(
                 map((data: any) => { 
+                    // console.log("effects response ", data.data)
                     return getAllRecipeSuccess(data); 
                 })
             )

@@ -42,6 +42,6 @@ on(getAllFavouriteSuccess, (state, action) => {
 }),
 );
 
-export function postsReducer(state:any,action:any){
+export function postsReducer(state,action){
     return _postsReducer(state,action )
 }

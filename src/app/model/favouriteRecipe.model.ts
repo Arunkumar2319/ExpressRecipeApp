@@ -1,5 +1,5 @@
 export class favouriteRecipe{
-    id!: number;
+    id?: number;
     userId!: number;
     favId!: number;
 }

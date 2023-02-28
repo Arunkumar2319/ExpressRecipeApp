@@ -5,3 +5,6 @@ export class RecipeResponse{
     ingredients?: String;
     imageurl?: String;
 }
+export class RecipeSuccessResponse{
+    data: RecipeResponse[]
+}

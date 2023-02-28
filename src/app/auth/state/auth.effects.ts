@@ -2,8 +2,16 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, Effect, ofType } from "@ngrx/effects";
 import { exhaustMap, map, tap } from "rxjs";
 import { AuthService } from "src/app/appService/auth.service";
+import { User } from "src/app/model/user.model";
 import { loginStart, loginSuccess } from "./auth.action";
-
+interface authData{
+    id: number,
+    userName: string,
+    emailAddr: string,
+    password: string,
+    name: string,
+    results: {}
+}
 @Injectable()
 export class AuthEffects{
     constructor(private actions$: Actions, private authService: AuthService){}

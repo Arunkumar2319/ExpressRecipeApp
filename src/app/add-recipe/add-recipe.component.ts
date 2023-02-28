@@ -14,7 +14,6 @@ import { AppState } from '../store/app.state';
 })
 export class AddRecipeComponent implements OnInit {
   recipeForm!: FormGroup;
-  // public newRecipeObj:any;
   constructor(private store:Store<AppState>,private route:Router, private recipeService:RecipeService) { }
 
   ngOnInit(): void {

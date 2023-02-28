@@ -1,6 +1,11 @@
+import { RecipeResponse } from "src/app/model/recipeResponse.model"
 import { getAllFavouriteSuccess, getAllRecipeSuccess } from "./post.actions"
 import * as fromReducer from "./post.reducer"
 import { initialState } from "./post.state"
+
+interface favouriteRecipe{
+    favourite: {id: number, userId: number, favId: number}
+}
 
 // checking initial state
 describe('Test the reducer',() => {
@@ -15,7 +20,7 @@ describe('Test the reducer',() => {
 describe('Test the reducer 1', () => {
     it('check the getAll recipe reducer', () => {
         const action = {type: 'unknown'}
-        const state:any  = {id: '1', recipeName: 'Puttu', description: 'tasty', ingredients: 'flour'}
+        const state:any  = {id: 1, recipeName: 'Puttu', description: 'tasty', ingredients: 'flour', data: {}}
         const value = getAllRecipeSuccess(state)
         expect(value).not.toBeNull()
     })
@@ -25,7 +30,7 @@ describe('Test the reducer 1', () => {
 describe('Test the reducer 2', () => {
     it('check the get all favourites', () => {
         const action = {type: 'unknown'}
-        const state: any = { user_id: 1, fav_id: 2, id: 21 }
+        const state:any = { userId: 1, favId: 2, id: 21 }
         const favourite = getAllFavouriteSuccess(state)
         expect(favourite).not.toBeNull()
     })
