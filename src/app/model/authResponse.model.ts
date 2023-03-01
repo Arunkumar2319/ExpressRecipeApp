@@ -4,6 +4,8 @@ export class AuthResponse{
     email?: String;
     password?: String;
     name?: String;
-    premium?: String;
-    results?:{}
+}
+
+export class authResponseSuccess{
+    results: AuthResponse[]
 }

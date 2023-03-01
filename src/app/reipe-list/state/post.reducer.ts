@@ -38,7 +38,7 @@ on(getAllRecipeSuccess, (state, action) => {
     return { ...state, data: action.data}
 }),
 on(getAllFavouriteSuccess, (state, action) => {
-    return {...state, favourites: action}
+    return {...state, favourites: action.favourite}
 }),
 );
 

@@ -3,7 +3,7 @@ import { HttpClient} from "@angular/common/http"
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
 import { RecipeResponse, RecipeSuccessResponse } from "../model/recipeResponse.model";
-import { favouriteRecipe } from "../model/favouriteRecipe.model";
+import { favouriteRecipe, favouriteRecipeSuccess } from "../model/favouriteRecipe.model";
 
 interface recipeObj{
     id?: number;
@@ -22,13 +22,13 @@ export class RecipeService{
     serviceApiUrl: String = environment.serviceApiUrl;
 
 
-    fetchAllDatas(): Observable<RecipeResponse[]>{
-        return this.http.get<RecipeResponse[]>(
+    fetchAllDatas(): Observable<RecipeSuccessResponse>{
+        return this.http.get<RecipeSuccessResponse>(
             this.serviceApiUrl + "recipes"
         );
     }
-    fetchAllFavDatas(){
-        return this.http.get<Observable<favouriteRecipe>>(this.serviceApiUrl + "favourites")
+    fetchAllFavDatas(): Observable<favouriteRecipeSuccess>{
+        return this.http.get<favouriteRecipeSuccess>(this.serviceApiUrl + "favourites")
     }
 
     addNewRecipeItem(data:recipeObj){
@@ -36,7 +36,7 @@ export class RecipeService{
     }
     updateRecipeById(data:recipeObj){
         return this.http.post(this.serviceApiUrl+ "api/updateid", data)
-    }
+    }   
     getRecipeById(id: number){
         return this.http.get(this.serviceApiUrl+ "api/id?id=" + id)
     }

@@ -3,3 +3,7 @@ export class favouriteRecipe{
     userId!: number;
     favId!: number;
 }
+
+export class favouriteRecipeSuccess{
+    favourite: favouriteRecipe
+}

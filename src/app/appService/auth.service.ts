@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { AuthResponse } from "../model/authResponse.model";
+import { AuthResponse, authResponseSuccess } from "../model/authResponse.model";
 import { User } from "../model/user.model";
 
 @Injectable({
@@ -13,12 +14,12 @@ export class AuthService {
 
     serviceApiUrl: String = environment.serviceApiUrl
 
-    checkLogin(email:String, password: String){
+    checkLogin(email:String, password: String) : Observable<authResponseSuccess>{
         let obj:User = {}
         obj.emailAddr = email
         obj.password = password
         console.log("login info", obj)
-        return this.http.post(this.serviceApiUrl+ "api/login", obj)
+        return this.http.post<authResponseSuccess>(this.serviceApiUrl+ "api/login", obj)
     }
    
 }

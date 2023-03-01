@@ -36,12 +36,11 @@ export class LoginPageComponent implements OnInit {
     console.log("form data", this.loginForm.value)
     this.store.dispatch(loginStart(this.loginForm.value));
     this.store.select(loginSuccessSelector).subscribe(x => {
-      var obj: any = {}
-      console.log("xxxxxxxxxxxxxxxxxxx", x)
+      var obj = {}
       obj = x
       if(obj){
-        console.log("Got data",obj?.action[0] )
-        sessionStorage.setItem("loginCredentials", JSON.stringify(obj?.action[0]) )
+        console.log("Got data",obj )
+        sessionStorage.setItem("loginCredentials", JSON.stringify(obj) )
         this.router.navigateByUrl("recipelist")
       }
     })

@@ -1,7 +1,9 @@
 import { createAction, props } from "@ngrx/store"
+import { AddFavourite } from "src/app/model/addFavourite.model";
 import { favouriteRecipe } from "src/app/model/favouriteRecipe.model";
 import { Post } from "src/app/model/posts.model"
 import { RecipeResponse, RecipeSuccessResponse } from "src/app/model/recipeResponse.model";
+import { RemoveFavourite } from "src/app/model/removeFavourite.model";
 
 interface favouriteItem{
     id?: number;
@@ -26,8 +28,8 @@ export enum Action_Type{
 export const getAllRecipe = createAction(
     Action_Type.onGetAllRecipes
 )
-// export const getAllRecipeSuccess = createAction(GET_ALL_RECIPE_SUCCESS, props<{data}>())
-export const getAllRecipeSuccess = createAction(Action_Type.GET_ALL_RECIPE_SUCCESS, (data: RecipeSuccessResponse) => (  data))
+export const getAllRecipeSuccess = createAction(Action_Type.GET_ALL_RECIPE_SUCCESS, props<{data}>())
+// export const getAllRecipeSuccess = createAction(Action_Type.GET_ALL_RECIPE_SUCCESS, (data: RecipeSuccessResponse) => (  data))
 
 
 
@@ -39,7 +41,7 @@ export const GET_ALL_FAVOURITE_SUCCESS = '[API CALL] Get all Favourites success'
 export const getAllFavourites = createAction(
     Action_Type.onGetAllFavourites
 )
-export const getAllFavouriteSuccess = createAction(GET_ALL_FAVOURITE_SUCCESS, props<{favourite: favouriteRecipe}>())
+export const getAllFavouriteSuccess = createAction(GET_ALL_FAVOURITE_SUCCESS, props<{favourite}>())
 
 // Add Favourite
 export enum Action_Type{
@@ -48,19 +50,19 @@ export enum Action_Type{
 export const ADD_FAVOURITE_SUCCESS = '[API CALL] Add to favourite success'
 export const addToFavourite = createAction(
     Action_Type.onAddToFavourites,
-    props<{obj: any}>()
+    props<{favRecipeMap: AddFavourite}>()
 )
-export const AddToFavouriteSuccess = createAction(Action_Type.GET_ALL_RECIPE_SUCCESS)
+export const AddToFavouriteSuccess = createAction(ADD_FAVOURITE_SUCCESS )
 
 
 
 // Remove Favourites
 export enum Action_Type{
-    onRemoveFavourites= '[API CALL] Get all recipe'
+    onRemoveFavourites= '[API CALL] Remove recipe from favourites'
 }
-export const REMOVE_FAVOURITE_SUCCESS = '[API CALL] Get all recipe success'
+export const REMOVE_FAVOURITE_SUCCESS = '[API CALL] Remove from favourite success'
 export const removeFromFavourite = createAction(
     Action_Type.onRemoveFavourites,
-    props<{obj: favouriteItem}>()
+    props<{favRecipeRemoveIds: RemoveFavourite}>()
 )
-export const RemoveFromFavouriteSuccess = createAction(Action_Type.GET_ALL_RECIPE_SUCCESS)
+export const RemoveFromFavouriteSuccess = createAction(REMOVE_FAVOURITE_SUCCESS)
