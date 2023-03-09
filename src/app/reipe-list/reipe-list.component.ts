@@ -51,7 +51,7 @@ export class ReipeListComponent implements OnInit {
   postForm!: FormGroup;
   public userData!:userObject;
   public recipeData!: recipeObj;
-  public favRecipeDatas: Array<any> = [];
+  public favRecipeDatas: Array<Object> = [];
 
   public favouriteObj:Array<Object> = [] ;
 
