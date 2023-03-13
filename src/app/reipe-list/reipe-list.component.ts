@@ -5,95 +5,104 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { RecipeService } from '../appService/recipe.service';
+import { favouriteRecipe } from '../model/favouriteRecipe.model';
 import { Post } from '../model/posts.model';
+import { RecipeResponse, RecipeSuccessResponse } from '../model/recipeResponse.model';
 import { AppState } from '../store/app.state';
 import { addToFavourite, deletePost, getAllFavourites, getAllRecipe, removeFromFavourite, updatePost } from './state/post.actions';
 import { getFavourites, getPost } from './state/post.selector';
+
+interface userObject {
+  id: number;
+  userName: String;
+  email: String;
+  password: String;
+  name: String;
+}
+
+interface recipeObj{
+  id: number;
+  recipeName : String;
+  description: String;
+  ingredients : String;
+  imageurl?: String;
+}
+// interface recipeArrayObj{
+//   dataList: Array<recipeObj>
+// }
+
+interface favObj{
+  obj: {id?: number;
+  userId: number;
+  favId: number;}
+}
 
 @Component({
   selector: 'app-reipe-list',
   templateUrl: './reipe-list.component.html',
   styleUrls: ['./reipe-list.component.scss']
 })
+
 export class ReipeListComponent implements OnInit {
 
   posts!: Observable<Post[]>;
-  public dataList:any;
-
+  
+  public dataList:RecipeResponse[] = []
   postForm!: FormGroup;
-  public userData:any;
-  public recipeData:any;
-  public favRecipeDatas: any;
+  public userData!:userObject;
+  public recipeData!: recipeObj;
+  public favRecipeDatas: Array<Object> = [];
 
-  public favouriteObj:any;
-  public mappingArr:any;
+  public favouriteObj:Array<Object> = [] ;
 
   public fovouriteBool: Boolean = false;
-  constructor(private store: Store<AppState>,private route: Router,private router: ActivatedRoute, private recipeService: RecipeService) { }
+  constructor(private store: Store<AppState>,private route: Router) {
+
+   }
 
   ngOnInit(): void {
-    this.recipeData = {}
-    this.userData = []
+    // this.recipeData = {}
+    // this.userData = {}
 
     this.favouriteObj = []
-    this.mappingArr = []
     this.favRecipeDatas = []
-
-    let userData:any = sessionStorage.getItem('loginCredentials')
-    this.userData = JSON.parse(userData)
-    console.log("user data", this.userData)
+    let userData = JSON.parse(sessionStorage.getItem('loginCredentials')|| "")
+    if(userData != null){
+      this.userData = userData
+      console.log("user data", this.userData)
+    }
   
   this.postForm = new FormGroup({
     name: new FormControl(null,[Validators.required,Validators.minLength(3)]),
     description: new FormControl(null),
     ingredients: new FormControl(null)
-    })
-  
-  
- 
-  this.dataDescriber()
-    
-   
-  }
-  onItemSelectRecipe(data:any){
+  }) 
 
-  }
-  dataDescriber(){
-    this.store.dispatch(getAllRecipe());
+  this.store.dispatch(getAllRecipe());
     this.store.select(getPost).subscribe(data => {
-      this.dataList = data
-      console.log("got datas", this.dataList)
+      this.dataList = data.data
     })
-    if(this.userData == undefined || this.userData == null ){   
-      console.log("login not done")  
-    }
-    else{
-       this.store.dispatch(getAllFavourites());
+    if(this.userData != undefined || this.userData != null ){  
+      this.store.dispatch(getAllFavourites());
       this.store.select(getFavourites).subscribe(x => {
         this.favRecipeDatas = []
-        let tmpFav:any = []
-        tmpFav = x
-        this.favRecipeDatas = tmpFav?.favourites?.favourite
-        console.log("selector fav obj", this.favRecipeDatas)
-        // this.mapFavRecipeItems()
-      })
-    }
+        this.favRecipeDatas = x.favourites
+        // console.log("selector fav obj", this.favRecipeDatas, )
+        if(this.favRecipeDatas.length != 0){
+          this.mapFavRecipeItems()
+        }
+      }) 
+    }    
+  // this.dataDescriber()  
   }
+
+
  
   addRecipe(){
-    console.log("new item clicked");
     this.route.navigateByUrl('/newRecipe')
   }
-  updateRecipe(data:any){
-
-
-    // dispatch action here
-    // const post: Post ={
-    //   id: this.postForm.value.id,
-    //   name: this.postForm.value.name,
-    //   description: this.postForm.value.description      
-    // }
-    const recipeName = this.recipeData.name
+  updateRecipe(){   
+    const recipeName = this.recipeData.recipeName
     const description = this.recipeData.description
     const ingredients = this.recipeData.ingredients
 
@@ -106,65 +115,47 @@ export class ReipeListComponent implements OnInit {
 
     this.store.dispatch(updatePost({post}))
   }
-  getId(data:any){
+  getId(data){
     this.recipeData = data
-    console.log("edit datas ", this.recipeData)
     this.route.navigateByUrl('recipeList/editRecipe/'+ data.id)    
   }
-  deleteRecipe(id:any){
-    console.log("delete this id",id)
+  deleteRecipe(id:number){
     if(confirm('Are you sure you want to delete')){
       this.store.dispatch(deletePost({id}))
     }
   }
-  // mapFavRecipeItems(){
-  //   console.log("recipes favourite", this.favRecipeDatas, "len", this.favRecipeDatas?.length)
-  //   // let ids = []
-  //   // ids.push(this.favRecipeDatas?.data)
-  //   // console.log("favId", ids)
-  //   for(let i =0 ; i< this.favRecipeDatas.length ; i++){
-  //     if(this.userData?.id == this.favRecipeDatas[i].user_id){
-  //       this.favouriteObj[this.favRecipeDatas[i].fav_id - 1] = true
-  //       // this.favouriteObj[this.favRecipeDatas?.data[i].fav_id] = true
-
-  //       console.log("mapped fav items",this.favouriteObj,"i",this.favRecipeDatas[i].fav_id)
-  //     }
-  //   }
-  // }
-  // onItemSelectFavourite(i: any, data:any){
-  //   this.favouriteObj[i] = true
-  //   Swal.fire('', 'Recipe added to favourites', 'success')
-  //   let tmp:any ={}
-  //   tmp.userId = this.userData?.id
-  //   tmp.favId = data.id
-    
-
-  //   console.log("mapped data", tmp)
-  //   if(tmp.userId && tmp.favId){
-  //     this.store.dispatch(addToFavourite(tmp))
-      
-  //   }
-
-  // }
-  // onItemDeSelectFavourite(i: number, data:any){
-  //   console.log("id to be deselected", i,data)
-  //   this.favouriteObj[i] = false
-  //   this.mappingArr.splice(i+1, -1)
-  //   console.log("after removed", this.mappingArr);
-  //   let tmp:any = {}
-  //   tmp.userId = this.userData?.id;
-  //   tmp.favId = data.id
-  //   console.log("deselected item", tmp)
-  //   if(tmp.userId && tmp.favId){
-  //     this.store.dispatch(removeFromFavourite(tmp))
-  //   }    
-  // }
-  edit(data: any){
-   console.log("something", data) 
+  mapFavRecipeItems(){
+    for(let i =0 ; i< this.favRecipeDatas.length ; i++){
+      if(this.userData?.id == this.favRecipeDatas[i].user_id){
+        this.favouriteObj[this.favRecipeDatas[i].fav_id - 1] = true
+        console.log("fav recipes based on ids", this.favouriteObj)
+      }
+    }
   }
-  searchRecipeItem(){
-
+  onItemSelectFavourite(i: number, data){
+    this.favouriteObj[i] = true
+    console.log("fav select",data, i )
+    Swal.fire('', 'Recipe added to favourites', 'success')
+    let favRecipeMap = {   
+      userId: this.userData?.id,
+      favId: data.id 
+    }    
+    if(favRecipeMap.userId && favRecipeMap.favId){
+      this.store.dispatch(addToFavourite({favRecipeMap}))      
+    }
   }
+  onItemDeSelectFavourite(i: number, data){
+    this.favouriteObj[i] = false
+    let favRecipeRemoveIds = {
+   
+      userId: this.userData?.id,
+      favId: data.id
+    }    
+    if(favRecipeRemoveIds.userId && favRecipeRemoveIds.favId){
+      this.store.dispatch(removeFromFavourite({favRecipeRemoveIds}))
+    }    
+  }
+  
   onClickLogin(){
     this.route.navigateByUrl("login")
   }

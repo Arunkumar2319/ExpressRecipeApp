@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-// import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AppState } from 'src/app/store/app.state';
 import { loginStart } from '../state/auth.action';
 import { loginSuccessSelector } from '../state/auth.selector';
@@ -18,18 +17,11 @@ export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   user!: gapi.auth2.GoogleUser;
 
-  // socialUser!: SocialUser;
-  // isLoggedin?: boolean;
   constructor(private store: Store<AppState>, private router: Router, private signInService: GoogleSignInService,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.generateForm();
-    // this.socialAuthService.authState.subscribe((user) => {
-    //   this.socialUser = user;
-    //   this.isLoggedin = user != null;
-    //   console.log(this.socialUser);
-    // });
+    this.generateForm();   
     this.signInService.observable().subscribe( user => {
       this.user = user
     })
@@ -42,16 +34,13 @@ export class LoginPageComponent implements OnInit {
   }
   onClickLogin(){
     console.log("form data", this.loginForm.value)
-    // let email = this.loginForm.value.email
-    // let password = this.loginForm.value.password
     this.store.dispatch(loginStart(this.loginForm.value));
     this.store.select(loginSuccessSelector).subscribe(x => {
-      var obj: any = {}
-      console.log("xxxxxxxxxxxxxxxxxxx", x)
+      var obj = {}
       obj = x
       if(obj){
-        console.log("Got data",obj?.action?.results[0] )
-        sessionStorage.setItem("loginCredentials", JSON.stringify(obj?.action?.results[0]) )
+        console.log("Got data",obj )
+        sessionStorage.setItem("loginCredentials", JSON.stringify(obj) )
         this.router.navigateByUrl("recipelist")
       }
     })

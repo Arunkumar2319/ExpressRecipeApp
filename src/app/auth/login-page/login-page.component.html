@@ -1,11 +1,10 @@
 <div class="image"></div>
-<!-- <img src="assets/food.jpg"> -->
 <div class="container">
-    <img src="assets/food.jpg" alt="Norway" >
-    <div class="text-block">
-      <h3 class="m-3" style="color:blue"><b>Login</b></h3>
-      <br>
-      <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
+  <img src="assets/food.jpg" alt="Norway">
+  <div class="text-block">
+    <h3 class="m-3" style="color:blue"><b>Login</b></h3>
+    <br>
+    <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
       <div class="m-2 row">
         <label><b>Email</b></label><br>
         <input class="form-control" type="text" formControlName="emailAddr">
@@ -21,11 +20,11 @@
         <p style="color: blue;text-align: center">Don't have account ?<a>&nbsp;&nbsp;SignUp</a></p>
       </div>
       <div class="row m-2">
-        <!-- <button class="btn btn-primary" type="button" (click)="signIn()">Login with Google</button> -->
-        <a style="color: red"  (click)="$event.preventDefault();signIn()" class="google btn"><i class="fa fa-google fa-fw">
-        </i> Login with Google+
-      </a>
+        <a style="color: red" (click)="$event.preventDefault();signIn()" class="google btn"><i
+            class="fa fa-google fa-fw">
+          </i> Login with Google+
+        </a>
       </div>
-      </form>
-    </div>
+    </form>
   </div>
+</div>

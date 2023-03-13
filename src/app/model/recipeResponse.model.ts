@@ -1,7 +1,10 @@
 export class RecipeResponse{
-    id: any;
+    id?: number;
     recipeName?: String;
     description?: String;
     ingredients?: String;
     imageurl?: String;
+}
+export class RecipeSuccessResponse{
+    data: RecipeResponse[]
 }

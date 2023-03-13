@@ -1,110 +1,66 @@
 <ul>
-    <!-- <div class="col-md-12"> -->
-      <!-- <div class="row"> -->
-            <li><a class="active" href="">Home</a></li>
-            <li><a href="">Offers</a></li>
-            <li><a (click)="$event.preventDefault();addRecipe()">New</a></li>
-            <li *ngIf="!userData?.id"><a (click)="$event.preventDefault();onClickLogin()">Login</a></li>
-            <!-- <li class="m-2" style="position: relative;float:right"><button class="btn btn-primary" (click)="searchRecipeItem()">Search</button></li>  -->
-            <!-- <li><i class="fa fa-sign-out" aria-hidden="true"></i></li> -->
-            <!-- <li><a (click)="$event.preventDefault()" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> </li> -->
-            <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i *ngIf="userData?.id" class="fa fa-user-circle" aria-hidden="true"></i></li>
-            <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i *ngIf="userData?.id" class="fa fa-sign-out" aria-hidden="true"></i></li>
+  <li><a class="active" href="">Home</a></li>
+  <li><a href="">Offers</a></li>
+  <li><a (click)="$event.preventDefault();addRecipe()">New</a></li>
+  <li *ngIf="!userData?.id"><a (click)="$event.preventDefault();onClickLogin()">Login</a></li>
+  <!-- <li><i class="fa fa-sign-out" aria-hidden="true"></i></li> -->
+  <!-- <li><a (click)="$event.preventDefault()" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> </li> -->
+  <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i *ngIf="userData?.id"
+      class="fa fa-user-circle" aria-hidden="true"></i></li>
+  <li class="m-2" style="position: relative;float: right;color: white;font-size: 20px"><i *ngIf="userData?.id"
+      class="fa fa-sign-out" aria-hidden="true"></i></li>
 
-            <li class="m-2" style="position: relative;;float:right">
-                <form class="form-inline"> 
-                    <input class="form-control mr-sm-2" sty type="search"  placeholder="Search" aria-label="Search">
-                </form> 
-            </li>
-            <!-- <button  class="btn btn-primary">New</button> -->
-    <!-- </div>
-    </div> -->
+  <li class="m-2" style="position: relative;;float:right">
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" sty type="search" placeholder="Search" aria-label="Search">
+    </form>
+  </li>
 </ul>
 
-<div class="row" >
-    <div class="col-md-12" >
-        <div class="card"  *ngFor="let data of dataList?.data, let i= index" >
-            <!-- <div class="container"> -->
-                <div class="row">
-                    <div class="col-md-12">
-                      <img *ngIf="i == 0" src='assets/malabarbriyani.jpg' alt="" style="width:459px;height: 227px;object-fit: cover;">
-                      <img *ngIf="i == 1" src='assets/bunParotta.jpg' alt="" style="width:459px;height: 227px;object-fit: cover;">
-                      <img *ngIf="i == 2" src='assets/malabarParata.jpg' alt="" style="width:459px;height: 227px;object-fit: cover;">
-                      <img *ngIf="i == 3" src='assets/bananapeel.jpg' alt="" style="width:459px;height: 227px;object-fit: cover;">
-                      
-                      <!-- <div class="overlay">
-                        <span><i class=" fa fa-edit"></i></span>
-                      </div> -->
-                      <div class="col-md-2 favouriteAlign overlay">
-                        <!-- <span  class="btn btn-info m-2" (click)="fovouriteBool = !fovouriteBool;onItemSelectFavourite(i)">Favourites<br><i *ngIf="favouriteObj[i].fav" class="fa fa-heart" style="color: red"></i><i *ngIf="!favouriteObj[i].fav" class="fa fa-heart-o"></i></span> -->
-                        <!-- <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)" title="Remove from Favourites"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
-                        <span  class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)" title="Add to Favourites"><i  class="fa fa-heart-o m-2" style="color:red;font-size: 28px"></i></span> -->
-  
-                    </div>
-                      <!-- <span class="glyphicon overlay" >&#x270f;</span> -->
-                    </div>
-                    <!-- <div class="col-md-4">
-                          <button class="btn btn-primary m-1" style="font-size:10px" (click)="getId(data)">Edit</button>
-                          <button class="btn btn-danger m-1" style="font-size:10px" (click)="deleteRecipe(data.id)">Delete</button>
-
-                    </div> -->
-                </div>
-                <div class="row">
-                  <div class="col-md-8">
-                    <h4 class="m-1"><b>{{data.recipeName}}</b></h4>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star-o" style="color: goldenrod;"></span>
-                      <span class="fa fa-star-o" style="color: goldenrod;"></span><br>
-                      <!-- <span>3</span> -->
-                      <!-- <p>{{data.description}}</p> -->
-                  </div>
-                  <div class="col-md-2"></div>
-                  <div class="col-md-2 favouriteAlign">
-                    <span  (click)="getId(data)"><i class=" fa fa-edit"></i></span>    
-                    <span (click)="deleteRecipe(data.id)"><i class="fa fa-trash m-2" style="font-size:24px;color: red"></i></span>
-                    <!-- <span  class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)"><i  class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
-                      <span  class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)"><i  class="fa fa-heart-o m-2" style="font-size: 28px"></i></span> -->
-
-                  </div>
-                </div>              
-            <!-- </div> -->
-          </div>    
-        </div>
-    </div>
-    
-     <!-- <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <input type="text" placeholder="Search..">
-      </div> -->
-
-      <!-- <div class="row">
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" *ngFor="let data of dataList, let i= index">
+      <div class="row">
         <div class="col-md-12">
-            <table class="table table-stripped">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let data of posts | async">
-                        <td>{{data.id}}</td>
-                        <td>{{data.name}}</td>
-                        <td>{{data.description}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-      </div> -->
+          <img *ngIf="i == 0" src='assets/malabarbriyani.jpg' alt=""
+            style="width:459px;height: 227px;object-fit: cover;">
+          <img *ngIf="i == 1" src='assets/bunParotta.jpg' alt="" style="width:459px;height: 227px;object-fit: cover;">
+          <img *ngIf="i == 2" src='assets/malabarParata.jpg' alt=""
+            style="width:459px;height: 227px;object-fit: cover;">
+          <img *ngIf="i == 3" src='assets/bananapeel.jpg' alt="" style="width:459px;height: 227px;object-fit: cover;">
 
-      
-      <!-- Modal -->
-      <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="col-md-2 favouriteAlign overlay">
+            <span class="m-2" *ngIf="favouriteObj[i]" (click)="onItemDeSelectFavourite(i, data)"
+              title="Remove from Favourites"><i class="fa fa-heart m-2" style="color: red;font-size: 28px"></i></span>
+            <span class="m-2" *ngIf="!favouriteObj[i]" (click)="onItemSelectFavourite(i, data)"
+              title="Add to Favourites"><i class="fa fa-heart-o m-2" style="color:red;font-size: 28px"></i></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="m-1"><b>{{data.recipeName}}</b></h4>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star-o" style="color: goldenrod;"></span>
+            <span class="fa fa-star-o" style="color: goldenrod;"></span><br>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-3 favouriteAlign">
+            <span (click)="getId(data)"><i class=" fa fa-edit"></i></span>
+            <span (click)="deleteRecipe(data.id)"><i class="fa fa-trash m-2"
+                style="font-size:24px;color: red"></i></span>           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal -->
+
+  <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -128,5 +84,3 @@
           </div>
         </div>
       </div> -->
-
-      <!-- <img src={{dataList?.data[1]?.imageurl}} alt="" style="width:20%;height:20%"> -->

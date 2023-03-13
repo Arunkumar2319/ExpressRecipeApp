@@ -1,6 +1,6 @@
 export class recipe{
-    id: any;
-    name: any;
-    decription: any
-    rating:any;
+    id!: number;
+    name: string = '';
+    decription: string = '';
+    rating!:number;
 }

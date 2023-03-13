@@ -11,7 +11,7 @@ export class LoginService {
 
     serviceApiUrl: String = environment.serviceApiUrl
 
-    checkLogin(data:any){
+    checkLogin(data){
         console.log("login info", data)
         return this.http.post(this.serviceApiUrl+ "api/login", data)
     }

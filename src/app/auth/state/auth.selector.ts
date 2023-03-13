@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { postsState } from "src/app/reipe-list/state/post.state";
+import { AuthState } from "./auth.state";
 
-const getPostsState = createFeatureSelector<postsState>('auth')
+const getAuthState = createFeatureSelector<AuthState>('auth')
 
-export const loginSuccessSelector = createSelector(getPostsState, (state) => {
-    return state
+export const loginSuccessSelector = createSelector(getAuthState, (state) => {
+    return state.auth
 })
