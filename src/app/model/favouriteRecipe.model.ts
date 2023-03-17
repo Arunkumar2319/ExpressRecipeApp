@@ -1,7 +1,7 @@
 export class favouriteRecipe{
     id?: number;
-    userId!: number;
-    favId!: number;
+    userId: number;
+    favId: number;
 }
 
 export class favouriteRecipeSuccess{

@@ -1,8 +1,8 @@
 export class RecipeResponse{
-    id?: number;
-    recipeName?: String;
-    description?: String;
-    ingredients?: String;
+    id: number;
+    recipeName: String;
+    description: String;
+    ingredients: String;
     imageurl?: String;
 }
 export class RecipeSuccessResponse{

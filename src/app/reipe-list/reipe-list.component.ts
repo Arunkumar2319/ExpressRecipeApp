@@ -27,14 +27,11 @@ interface recipeObj{
   ingredients : String;
   imageurl?: String;
 }
-// interface recipeArrayObj{
-//   dataList: Array<recipeObj>
-// }
 
-interface favObj{
-  obj: {id?: number;
-  userId: number;
-  favId: number;}
+interface favouriteRecipeObject{
+  user_id: number;
+  fav_id: number;
+  id: number;
 }
 
 @Component({
@@ -48,12 +45,13 @@ export class ReipeListComponent implements OnInit {
   posts!: Observable<Post[]>;
   
   public dataList:RecipeResponse[] = []
-  postForm!: FormGroup;
-  public userData!:userObject;
-  public recipeData!: recipeObj;
-  public favRecipeDatas: Array<Object> = [];
+  postForm: FormGroup;
+  public userData:userObject;
+  public recipeData: recipeObj;
 
-  public favouriteObj:Array<Object> = [] ;
+  public favRecipeDatas: Array<any> = []; //  Any defined -----
+
+  public favouriteRecipeMapping:Array<Object> = [] ;
 
   public fovouriteBool: Boolean = false;
   constructor(private store: Store<AppState>,private route: Router) {
@@ -61,15 +59,12 @@ export class ReipeListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.recipeData = {}
-    // this.userData = {}
 
-    this.favouriteObj = []
+    this.favouriteRecipeMapping = []
     this.favRecipeDatas = []
     let userData = JSON.parse(sessionStorage.getItem('loginCredentials')|| "")
     if(userData != null){
       this.userData = userData
-      console.log("user data", this.userData)
     }
   
   this.postForm = new FormGroup({
@@ -87,16 +82,12 @@ export class ReipeListComponent implements OnInit {
       this.store.select(getFavourites).subscribe(x => {
         this.favRecipeDatas = []
         this.favRecipeDatas = x.favourites
-        // console.log("selector fav obj", this.favRecipeDatas, )
         if(this.favRecipeDatas.length != 0){
-          this.mapFavRecipeItems()
+          this.mapRecipeItemsToFavourite()
         }
       }) 
     }    
-  // this.dataDescriber()  
   }
-
-
  
   addRecipe(){
     this.route.navigateByUrl('/newRecipe')
@@ -112,10 +103,9 @@ export class ReipeListComponent implements OnInit {
       description,
       ingredients      
     }
-
     this.store.dispatch(updatePost({post}))
   }
-  getId(data){
+  getId(data: recipeObj){
     this.recipeData = data
     this.route.navigateByUrl('recipeList/editRecipe/'+ data.id)    
   }
@@ -124,17 +114,15 @@ export class ReipeListComponent implements OnInit {
       this.store.dispatch(deletePost({id}))
     }
   }
-  mapFavRecipeItems(){
+  mapRecipeItemsToFavourite(){
     for(let i =0 ; i< this.favRecipeDatas.length ; i++){
       if(this.userData?.id == this.favRecipeDatas[i].user_id){
-        this.favouriteObj[this.favRecipeDatas[i].fav_id - 1] = true
-        console.log("fav recipes based on ids", this.favouriteObj)
+        this.favouriteRecipeMapping[this.favRecipeDatas[i].fav_id - 1] = true
       }
     }
   }
-  onItemSelectFavourite(i: number, data){
-    this.favouriteObj[i] = true
-    console.log("fav select",data, i )
+  onRecipeSelectForFavourite(i: number, data: recipeObj){
+    this.favouriteRecipeMapping[i] = true
     Swal.fire('', 'Recipe added to favourites', 'success')
     let favRecipeMap = {   
       userId: this.userData?.id,
@@ -144,10 +132,9 @@ export class ReipeListComponent implements OnInit {
       this.store.dispatch(addToFavourite({favRecipeMap}))      
     }
   }
-  onItemDeSelectFavourite(i: number, data){
-    this.favouriteObj[i] = false
-    let favRecipeRemoveIds = {
-   
+  onRecipeDeSelectFromFavourite(i: number, data: recipeObj){
+    this.favouriteRecipeMapping[i] = false
+    let favRecipeRemoveIds = {   
       userId: this.userData?.id,
       favId: data.id
     }    

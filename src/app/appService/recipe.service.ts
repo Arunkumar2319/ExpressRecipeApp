@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { HttpClient} from "@angular/common/http"
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
-import { RecipeResponse, RecipeSuccessResponse } from "../model/recipeResponse.model";
+import { RecipeSuccessResponse } from "../model/recipeResponse.model";
 import { favouriteRecipe, favouriteRecipeSuccess } from "../model/favouriteRecipe.model";
 
 interface recipeObj{
-    id?: number;
+    id: number;
     recipeName: string;
     description: string;
     ingredients?: string;

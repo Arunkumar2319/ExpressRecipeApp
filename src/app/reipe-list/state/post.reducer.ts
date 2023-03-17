@@ -15,17 +15,14 @@ const _postsReducer = createReducer(initialState, on(addRecipe, (state,action) =
 on(updatePost, (state,action) =>{
     const updatedPosts = state.posts.map((post) =>{
         
-        console.log("action",action.post)
         return action.post.id === post.id ? action.post : post
     });
-    console.log("something",updatedPosts,)
     return{
         ...state,
         posts: updatedPosts
     }
 }),
 // on(deletePost, (state,{ id }) =>{
-//     console.log("delete id", id )
 //     const updatedPost = state.posts.filter((post => {
 //         return post.id !== id;
 //     }));

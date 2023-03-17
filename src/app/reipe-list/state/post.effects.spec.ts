@@ -10,7 +10,7 @@ import { initialState } from "./post.state";
 import * as MyActions from "./post.actions"
 
 describe('Test the effects 1',() => {
-  let actions$: Observable;
+  let actions$: Observable<any>;
   let store: AppState;
   let httpService: RecipeService;
 //   beforeEach(() => {
@@ -37,7 +37,6 @@ describe('Test the effects 1',() => {
         expect(effects.LoadAllRecipeData$).toBe(expected)
         actions$ = of(getAllRecipe);
         effects.LoadAllRecipeData$.subscribe((res) => {
-            console.log(res)
             expect(res).not.toBeNull();
         })
     })
@@ -46,18 +45,17 @@ describe('Test the effects 1',() => {
         let effects: postEffects;      
         actions$ = of(getAllRecipe);
         effects.LoadAllFavouriteRecipe$.subscribe((res) => {
-            console.log(res)
             expect(res).not.toBeNull();
         })
     })
 })
 
 
-function hot(arg0: string, arg1: { a: import("@ngrx/store").ActionCreator<MyActions.Action_Type.onGetAllRecipes, () => import("@ngrx/store/src/models").TypedAction<MyActions.Action_Type.onGetAllRecipes>>; }):  {
+function hot(arg0: string, arg1: { a: import("@ngrx/store").ActionCreator<MyActions.Action_Type.onGetAllRecipes, () => import("@ngrx/store/src/models").TypedAction<MyActions.Action_Type.onGetAllRecipes>>; }): any {
     throw new Error("Function not implemented.");
 }
 
-function cold(arg0: string, arg1: { b: import("@ngrx/store").ActionCreator<MyActions.Action_Type.GET_ALL_RECIPE_SUCCESS, (props: { data }) => { data } & import("@ngrx/store/src/models").TypedAction<MyActions.Action_Type.GET_ALL_RECIPE_SUCCESS>>; }) {
+function cold(arg0: string, arg1: { b: import("@ngrx/store").ActionCreator<MyActions.Action_Type.GET_ALL_RECIPE_SUCCESS, (props: { data: any; }) => { data: any; } & import("@ngrx/store/src/models").TypedAction<MyActions.Action_Type.GET_ALL_RECIPE_SUCCESS>>; }) {
     throw new Error("Function not implemented.");
 }
 

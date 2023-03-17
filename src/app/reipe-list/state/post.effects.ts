@@ -16,7 +16,6 @@ export class postEffects{
         return this.action$.pipe(ofType(Action_Type.onGetAllRecipes),
             switchMap(() => this.recipeService.fetchAllDatas().pipe(
                 map((data: RecipeSuccessResponse) => { 
-                    // console.log("effects response ", data.data)
                     return getAllRecipeSuccess(data); 
                 })
             )
@@ -47,7 +46,6 @@ export class postEffects{
         return this.action$.pipe(ofType(Action_Type.onRemoveFavourites),
             switchMap((action: removeFavouriteIds) => this.recipeService.deleteRecipeFromFavourite(action.favRecipeRemoveIds).pipe(
                 map(() => { 
-                    console.log("post effects", action)
                     return RemoveFromFavouriteSuccess(); 
                 })
             )

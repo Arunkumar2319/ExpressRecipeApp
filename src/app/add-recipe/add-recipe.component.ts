@@ -14,10 +14,9 @@ import { AppState } from '../store/app.state';
 })
 export class AddRecipeComponent implements OnInit {
   recipeForm!: FormGroup;
-  constructor(private store:Store<AppState>,private route:Router, private recipeService:RecipeService) { }
+  constructor(private store:Store<AppState>,private route:Router) { }
 
   ngOnInit(): void {
-    // this.newRecipeObj = {}
     this.recipeForm = new FormGroup({
     name: new FormControl(null,[Validators.required,Validators.minLength(3)]),
     description: new FormControl(null),
@@ -25,15 +24,12 @@ export class AddRecipeComponent implements OnInit {
     })
   }
   onAddRecipe(){
-    if(this.recipeForm.valid){
-    console.log(this.recipeForm)
-    
+    if(this.recipeForm.valid){    
     const post: Post = {
       recipeName: this.recipeForm.value.name,
       description: this.recipeForm.value.description,
       ingredients: this.recipeForm.value?.ingredients
     }
-    var obj = {}
     this.store.dispatch(addRecipe({post}))
     this.route.navigateByUrl('/recipelist')
     }

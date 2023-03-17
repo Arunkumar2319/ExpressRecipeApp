@@ -3,7 +3,7 @@ import { loginStart } from "./auth.action";
 import { AuthEffects } from "./auth.effects"
 
 describe("check the login credentials", () => {
-    let actions$: Observable;
+    let actions$: Observable<any>;
 
     it("Login credential checks", () => {
         let effects: AuthEffects

@@ -1,7 +1,4 @@
-export class User{
-    id?: number;
-    userName?: String;
-    emailAddr?: String;
-    password?: String;
-    name?: String;
+export class userData{
+    emailAddr: String;
+    password: String;
 }
