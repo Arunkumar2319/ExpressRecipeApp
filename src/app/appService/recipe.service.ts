@@ -31,19 +31,19 @@ export class RecipeService{
         return this.http.get<favouriteRecipeSuccess>(this.serviceApiUrl + "favourites")
     }
 
-    addNewRecipeItem(data:recipeObj){
-        return this.http.post(this.serviceApiUrl+ "addRecipe", data)
+    addNewRecipeItem(newRecipeData:recipeObj){
+        return this.http.post(this.serviceApiUrl+ "addRecipe", newRecipeData)
     }
-    updateRecipeById(data:recipeObj){
-        return this.http.post(this.serviceApiUrl+ "api/updateid", data)
+    updateRecipeById(updateRecipeData:recipeObj){
+        return this.http.post(this.serviceApiUrl+ "api/updateid", updateRecipeData)
     }   
     getRecipeById(id: number){
         return this.http.get(this.serviceApiUrl+ "api/id?id=" + id)
     }
-    addRecipeToFavourite(data:favouriteRecipe){
-        return this.http.post(this.serviceApiUrl+ "api/addFavourite", data)
+    addRecipeToFavourite(favouriteRecipeData:favouriteRecipe){
+        return this.http.post(this.serviceApiUrl+ "api/addFavourite", favouriteRecipeData)
     }
-    deleteRecipeFromFavourite(data:favouriteRecipe){
-        return this.http.delete(this.serviceApiUrl+ "api/deleteById?userId="+ data.userId +"&favId=" + data.favId)
+    deleteRecipeFromFavourite(favouriteRecipeData:favouriteRecipe){
+        return this.http.delete(this.serviceApiUrl+ "api/deleteById?userId="+ favouriteRecipeData.userId +"&favId=" + favouriteRecipeData.favId)
     }
 }

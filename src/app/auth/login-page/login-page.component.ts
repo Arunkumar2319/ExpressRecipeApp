@@ -41,8 +41,7 @@ export class LoginPageComponent implements OnInit {
         sessionStorage.setItem("loginCredentials", JSON.stringify(authResponse))
         this.router.navigateByUrl("recipelist")
       }
-    })
-    
+    })    
   }
   signIn(){
     this.signInService.signIn()

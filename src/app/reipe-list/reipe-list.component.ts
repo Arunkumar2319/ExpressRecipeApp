@@ -49,7 +49,7 @@ export class ReipeListComponent implements OnInit {
   public userData:userObject;
   public recipeData: recipeObj;
 
-  public favRecipeDatas: Array<any> = []; //  Any defined -----
+  public favRecipeDatas: Array<any> = [];
 
   public favouriteRecipeMapping:Array<Object> = [] ;
 
@@ -105,9 +105,9 @@ export class ReipeListComponent implements OnInit {
     }
     this.store.dispatch(updatePost({post}))
   }
-  getId(data: recipeObj){
-    this.recipeData = data
-    this.route.navigateByUrl('recipeList/editRecipe/'+ data.id)    
+  getId(editRecipeData: recipeObj){
+    this.recipeData = editRecipeData
+    this.route.navigateByUrl('recipeList/editRecipe/'+ editRecipeData.id)    
   }
   deleteRecipe(id:number){
     if(confirm('Are you sure you want to delete')){
@@ -121,22 +121,22 @@ export class ReipeListComponent implements OnInit {
       }
     }
   }
-  onRecipeSelectForFavourite(i: number, data: recipeObj){
+  onRecipeSelectForFavourite(i: number, favouriteRecipeData: recipeObj){
     this.favouriteRecipeMapping[i] = true
     Swal.fire('', 'Recipe added to favourites', 'success')
     let favRecipeMap = {   
       userId: this.userData?.id,
-      favId: data.id 
+      favId: favouriteRecipeData.id 
     }    
     if(favRecipeMap.userId && favRecipeMap.favId){
       this.store.dispatch(addToFavourite({favRecipeMap}))      
     }
   }
-  onRecipeDeSelectFromFavourite(i: number, data: recipeObj){
+  onRecipeDeSelectFromFavourite(i: number, favouriteRecipeData: recipeObj){
     this.favouriteRecipeMapping[i] = false
     let favRecipeRemoveIds = {   
       userId: this.userData?.id,
-      favId: data.id
+      favId: favouriteRecipeData.id
     }    
     if(favRecipeRemoveIds.userId && favRecipeRemoveIds.favId){
       this.store.dispatch(removeFromFavourite({favRecipeRemoveIds}))

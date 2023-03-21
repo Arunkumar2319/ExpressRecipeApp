@@ -13,9 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeService } from './appService/recipe.service';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import sweetalert2 from 'sweetalert2';
 import { AuthEffects } from './auth/state/auth.effects';
-import { postModule } from './reipe-list/Posts.module';
 import { postEffects } from './reipe-list/state/post.effects';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
@@ -37,7 +35,6 @@ import { GoogleSignInService } from './auth/login-page/google-SignIn.service';
     StoreModule.forRoot(appReducer ),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AuthEffects,postEffects]),
-    // sweetalert2
     CommonModule
     
   ],
