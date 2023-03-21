@@ -20,9 +20,13 @@ describe('Test the reducer',() => {
 describe('Test the reducer 1', () => {
     it('check the getAll recipe reducer', () => {
         const action = {type: 'unknown'}
-        const state:any  = {id: 1, recipeName: 'Puttu', description: 'tasty', ingredients: 'flour', data: {}}
-        const value = getAllRecipeSuccess(state)
-        expect(value).not.toBeNull()
+        const result = fromReducer.postsReducer(initialState, action)
+        expect(result).toEqual({
+            ...initialState
+        })
+        // const state:any  = {id: 1, recipeName: 'Puttu', description: 'tasty', ingredients: 'flour', data: {}}
+        // const value = getAllRecipeSuccess(state)
+        // expect(value).not.toBeNull()
     })
 })
 
